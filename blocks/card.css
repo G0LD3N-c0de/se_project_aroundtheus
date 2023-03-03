@@ -1,0 +1,35 @@
+.card {
+  height: 361px;
+  max-width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+  margin: 0;
+}
+
+.card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 30px 0 20px;
+}
+
+.card__title {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

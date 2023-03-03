@@ -1,0 +1,23 @@
+.footer {
+  max-width: 880px;
+  padding: 60px 20px 65px;
+}
+
+.footer__copywright {
+  color: #545454;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+@media screen and (max-width: 938px) {
+  .footer__copywright {
+    font-size: 14px;
+    line-height: 16.94px;
+  }
+
+  .footer {
+    padding: 48px 20px 36px;
+  }
+}

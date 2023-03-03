@@ -1,0 +1,20 @@
+.page {
+  min-width: 280px;
+  max-width: 1280px;
+  margin: 0 auto;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.page__section {
+  margin: 0 auto;
+}
+
+/* @media screen and (max-width: 950px) {
+  .page__section {
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: calc(100% - 40px);
+  }
+} /*

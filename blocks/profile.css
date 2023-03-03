@@ -1,0 +1,130 @@
+.profile {
+  max-width: 880px;
+  height: 120px;
+  color: #fff;
+  display: flex;
+  padding: 40px 20px 50px;
+}
+
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__info {
+  margin: 22px 0 0 30px;
+}
+
+.profile__flex-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile__title {
+  margin: 0 25px 0 0;
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+}
+
+.profile__rectangle {
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.profile__rectangle:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.profile__edit-button {
+  height: 10px;
+  width: 10px;
+}
+
+.profile__subtitle {
+  margin: 16px 0 0 0;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  line-height: 21.78px;
+}
+
+.profile__add-button {
+  margin-left: auto;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 938px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 286px;
+    max-width: 282px;
+    padding-bottom: 36px;
+  }
+
+  .profile__info {
+    margin: 30px 0;
+  }
+
+  .profile__flex-container {
+    margin: 0;
+    align-items: center;
+    position: relative;
+  }
+
+  .profile__title {
+    font-size: 20px;
+    line-height: 26.63px;
+    margin-right: 0;
+  }
+
+  .profile__subtitle {
+    font-size: 14px;
+    line-height: 16.94px;
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  .profile__rectangle {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: -30px;
+    top: px;
+  }
+
+  .profile__edit-button {
+    width: 7px;
+    height: 7px;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    flex-grow: 1;
+    width: 100%;
+  }
+}
