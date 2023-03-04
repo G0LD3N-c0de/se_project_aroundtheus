@@ -10,11 +10,3 @@
 .page__section {
   margin: 0 auto;
 }
-
-/* @media screen and (max-width: 950px) {
-  .page__section {
-    margin-left: 20px;
-    margin-right: 20px;
-    max-width: calc(100% - 40px);
-  }
-} /*

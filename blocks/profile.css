@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 938px) {
+@media screen and (max-width: 638px) {
   .profile {
     flex-direction: column;
     align-items: center;
@@ -126,5 +126,23 @@
     margin: 0;
     flex-grow: 1;
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 639px) and (max-width: 810px) {
+  .profile__info {
+    flex-shrink: 0;
+  }
+
+  .profile__title {
+    font-size: 34px;
+  }
+
+  .profile__subtitle {
+    font-size: 16px;
+  }
+
+  .profile__add-button {
+    flex-shrink: 2;
   }
 }

@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 45px 0 0;
+  padding: 45px 20px 0;
 }
 
 .header__logo {
@@ -18,7 +18,7 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 938px) {
+@media screen and (max-width: 638px) {
   .header__logo {
     width: 126px;
     height: 24px;
