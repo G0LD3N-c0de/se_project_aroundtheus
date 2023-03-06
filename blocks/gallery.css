@@ -17,3 +17,11 @@
     justify-content: center;
   }
 }
+
+@media screen and (max-width: 638px) {
+  .gallery__cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
