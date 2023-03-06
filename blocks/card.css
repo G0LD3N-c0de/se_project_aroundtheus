@@ -1,5 +1,4 @@
 .card {
-  height: 361px;
   max-width: 282px;
   background-color: #fff;
   border-radius: 10px;
@@ -27,6 +26,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 25px 0;
 }
 
 .card__like-button:hover {

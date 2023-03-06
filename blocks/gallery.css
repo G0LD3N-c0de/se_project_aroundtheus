@@ -6,7 +6,7 @@
 .gallery__cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
-  grid-gap: 20px 18px;
+  gap: 20px 18px;
   list-style-type: none;
   padding: 0;
   margin: 0;
