@@ -87,7 +87,7 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 639px) and (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .profile__title {
     font-size: 36px;
     margin-right: 15px;
