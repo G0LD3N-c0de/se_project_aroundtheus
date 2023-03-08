@@ -79,7 +79,7 @@
   background-image: url(../images/Plus-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
-  transition: 0.5s ease-out;
+  transition: width 0.5s, height 0.5s;
 }
 
 .profile__add-button:hover {
