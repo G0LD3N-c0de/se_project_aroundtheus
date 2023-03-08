@@ -44,6 +44,7 @@
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
+  transition: opacity 0.2s;
 }
 
 .profile__rectangle:hover {
@@ -79,7 +80,7 @@
   background-image: url(../images/Plus-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
-  transition: width 0.5s, height 0.5s;
+  transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.2s;
 }
 
 .profile__add-button:hover {
@@ -173,6 +174,6 @@
     margin: 0;
     flex-grow: 1;
     width: 100%;
-    transition: none;
+    transition: width 0s, opacity 0.2s;
   }
 }
