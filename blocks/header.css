@@ -1,8 +1,7 @@
 .header {
   max-width: 880px;
   padding: 45px 0 0;
-  border-bottom: 1px solid #545454;
-  box-sizing: content-box;
+  border-bottom: 1px solid rgba(85, 85, 85, 0.6);
 }
 
 .header__logo {

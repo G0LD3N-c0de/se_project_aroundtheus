@@ -29,6 +29,13 @@
   margin: 25px 0;
 }
 
+.card__like-button {
+  appearance: none;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+}
+
 .card__like-button:hover {
   opacity: 0.5;
   cursor: pointer;

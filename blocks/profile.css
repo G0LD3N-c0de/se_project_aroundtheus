@@ -30,6 +30,7 @@
   white-space: nowrap;
   overflow: hidden;
   transition: 0.5s ease-out;
+  max-width: 450px;
 }
 
 .profile__rectangle {
@@ -38,10 +39,11 @@
   box-sizing: border-box;
   border: 1px solid #fff;
   margin-top: 6px;
-  background-color: black;
+  background-color: transparent;
   background-image: url(../images/pencil.svg);
   background-repeat: no-repeat;
   background-position: center;
+  flex-shrink: 0;
 }
 
 .profile__rectangle:hover {
@@ -63,6 +65,7 @@
   white-space: nowrap;
   overflow: hidden;
   transition: 0.5s ease-out;
+  max-width: 200px;
 }
 
 .profile__add-button {
@@ -72,18 +75,11 @@
   border: 2px solid #fff;
   border-radius: 2px;
   align-self: center;
-  background-color: black;
+  background-color: transparent;
   background-image: url(../images/Plus-sign.svg);
   background-repeat: no-repeat;
   background-position: center;
   transition: 0.5s ease-out;
-}
-
-.card__like-button {
-  appearance: none;
-  border: none;
-  background-color: inherit;
-  padding: 0;
 }
 
 .profile__add-button:hover {
@@ -91,14 +87,16 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 700px) and (max-width: 800px) {
+@media screen and (min-width: 639px) and (max-width: 800px) {
   .profile__title {
     font-size: 36px;
     margin-right: 15px;
+    max-width: 360px;
   }
 
   .profile__subtitle {
     font-size: 16px;
+    max-width: 180px;
   }
 
   .profile__add-button {
@@ -107,22 +105,14 @@
   }
 }
 
-@media screen and (min-width: 639px) and (max-width: 699px) {
+@media screen and (max-width: 730px) {
   .profile__title {
-    font-size: 36px;
-    margin-right: 15px;
-    transition: none;
+    max-width: 300px;
+    font-size: 33px;
   }
 
   .profile__subtitle {
-    font-size: 16px;
-    transition: none;
-  }
-
-  .profile__add-button {
-    width: 140px;
-    height: 48px;
-    transition: none;
+    max-width: 160px;
   }
 }
 
@@ -137,6 +127,9 @@
 
   .profile__info {
     margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .profile__flex-container {
@@ -150,6 +143,7 @@
     line-height: 26.63px;
     margin-right: 0;
     transition: none;
+    max-width: 200px;
   }
 
   .profile__subtitle {
@@ -158,6 +152,7 @@
     text-align: center;
     margin-top: 14px;
     transition: none;
+    max-width: 100px;
   }
 
   .profile__rectangle {
