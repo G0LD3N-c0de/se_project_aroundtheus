@@ -1,6 +1,6 @@
 **GitHub Page**
 
-https://g0ld3n-c0de.github.io/se_project_aroundtheus/
+https://g0ld3n-c0de.github.io/se_project_aroundtheus/   <--- Click me to see website :)
 
 # Project 3: Around The U.S.
 
