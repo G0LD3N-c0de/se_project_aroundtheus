@@ -32,7 +32,13 @@ let modalCloseButton = document.querySelector(".modal__close");
 editButton.addEventListener("click", function () {
   modal.classList.add("modal__opened");
 });
-
 modalCloseButton.addEventListener("click", function () {
   modal.classList.remove("modal__opened");
 });
+
+let modalTitle = document.querySelector(".modal__input-title");
+let modalDescription = document.querySelector(".modal__input-description");
+
+modalTitle.value = document.querySelector(".profile__title").textContent;
+modalDescription.value =
+  document.querySelector(".profile__subtitle").textContent;
