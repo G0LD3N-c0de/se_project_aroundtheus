@@ -29,115 +29,12 @@
               <h1 class="profile__title">Jacques Cousteau</h1>
               <button type="button" class="profile__rectangle"></button>
             </div>
-            <p class="profile__subtitle">Explorer</p>
+            <p class="profile__description">Explorer</p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="gallery page__section">
-          <ul class="gallery__cards">
-            <li class="card">
-              <img
-                src="./images/yosemite.jpg"
-                alt="picture of yosemite"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="picture of lake louise"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Lake Louise</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="Photo of bald mountains"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/latemar.jpg"
-                alt="Photo of Latemar"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Latemar</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/vanoise.jpg"
-                alt="Photo of Vanoise"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lago.jpg"
-                alt="Photo of Lago di Braies"
-                class="card__image"
-              />
-              <div class="card__info">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button type="button" class="card__like-button">
-                  <img
-                    src="./images/like-button.svg"
-                    alt="like button"
-                    class="card__like-button-image"
-                  />
-                </button>
-              </div>
-            </li>
-          </ul>
+          <ul class="gallery__cards"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -166,6 +63,22 @@
         </form>
       </div>
     </div>
+
+    <template class="card__template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__info">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button">
+            <img
+              src="./images/like-button.svg"
+              alt="like button"
+              class="card__like-button-image"
+            />
+          </button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
