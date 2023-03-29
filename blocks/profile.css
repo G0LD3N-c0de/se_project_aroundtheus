@@ -95,7 +95,7 @@
     max-width: 360px;
   }
 
-  .profile__subtitle {
+  .profile__description {
     font-size: 16px;
     max-width: 180px;
   }
@@ -112,7 +112,7 @@
     font-size: 33px;
   }
 
-  .profile__subtitle {
+  .profile__description {
     max-width: 160px;
   }
 }
@@ -147,7 +147,7 @@
     max-width: 200px;
   }
 
-  .profile__subtitle {
+  .profile__description {
     font-size: 14px;
     line-height: 16.94px;
     text-align: center;

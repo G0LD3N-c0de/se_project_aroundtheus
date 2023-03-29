@@ -32,8 +32,8 @@ let editButton = document.querySelector(".profile__rectangle");
 let modalCloseButton = document.querySelector(".modal__close");
 let profileTitle = document.querySelector(".profile__title");
 let profileDescription = document.querySelector(".profile__description");
-let modalTitle = document.querySelector(".modal__input-title");
-let modalDescription = document.querySelector(".modal__input-description");
+let modalTitle = document.querySelector("#modal__form-title");
+let modalDescription = document.querySelector("#modal__form-description");
 let modalForm = modal.querySelector(".modal__form");
 let cardTemplate =
   document.querySelector(".card__template").content.firstElementChild;
@@ -42,7 +42,20 @@ let cardList = document.querySelector(".gallery__cards");
 // Functions
 
 function closePopup() {
-  modal.classList.remove("modal__opened");
+  modal.classList.remove("modal_opened");
+}
+
+function openPopup() {
+  modal.classList.add("modal_opened");
+  modalTitle.value = profileTitle.textContent;
+  modalDescription.value = profileDescription.textContent;
+}
+
+function submitPopup(e) {
+  e.preventDefault();
+  profileTitle.textContent = modalTitle.value;
+  profileDescription.textContent = modalDescription.value;
+  closePopup();
 }
 
 function getCardElement(data) {
@@ -57,22 +70,11 @@ function getCardElement(data) {
 
 // Event Listeners
 
-editButton.addEventListener("click", function () {
-  modal.classList.add("modal__opened");
-  modalTitle.value = profileTitle.textContent;
-  modalDescription.value = profileDescription.textContent;
-});
+editButton.addEventListener("click", openPopup);
 
-modalCloseButton.addEventListener("click", function () {
-  closePopup();
-});
+modalCloseButton.addEventListener("click", closePopup);
 
-modalForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  profileTitle.textContent = modalTitle.value;
-  profileDescription.textContent = modalDescription.value;
-  closePopup();
-});
+modalForm.addEventListener("submit", submitPopup);
 
 // Handler
 

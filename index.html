@@ -44,17 +44,19 @@
 
     <div class="modal">
       <div class="modal__container">
-        <button class="modal__close"></button>
-        <p class="modal__heading">Edit Profile</p>
-        <form class="modal__form">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">Edit Profile</h2>
+        <form class="modal__form" name="modal__form">
           <input
-            class="modal__input-title modal__form-input"
+            class="modal__form-input"
+            id="modal__form-title"
             type="text"
             name="title"
             placeholder="Name"
           />
           <input
-            class="modal__input-description modal__form-input"
+            class="modal__form-input"
+            id="modal__form-description"
             type="text"
             name="subtitle"
             placeholder="Description"
