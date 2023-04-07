@@ -22,7 +22,7 @@ This project depicts a sample profile page with a responsive layout. The website
 
 **Technologies**
 
-This project utilized Figma, HTML, and CSS. Important techniques include flexbox and grid layout.
+This project is a work-in-progress. Current technologies used in this project include HTML, CSS, Figma, and JavaScript.
 
 **Images**
 
