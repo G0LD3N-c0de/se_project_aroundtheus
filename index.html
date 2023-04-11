@@ -42,7 +42,7 @@
       </footer>
     </div>
 
-    <div class="modal">
+    <div class="modal" id="modal__edit-profile">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
@@ -60,6 +60,30 @@
             type="text"
             name="subtitle"
             placeholder="Description"
+          />
+          <button class="modal__save" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="modal__new-item">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">New place</h2>
+        <form class="modal__form" name="modal__form">
+          <input
+            class="modal__form-input"
+            id="modal__new-item-title"
+            type="text"
+            name="title"
+            placeholder="Title"
+          />
+          <input
+            class="modal__form-input"
+            id="modal__new-item-url"
+            type="text"
+            name="image link"
+            placeholder="Image link"
           />
           <button class="modal__save" type="submit">Save</button>
         </form>
