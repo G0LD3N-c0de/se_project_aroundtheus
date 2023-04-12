@@ -90,18 +90,21 @@
       </div>
     </div>
 
+    <div class="modal" id="modal__picture-popup">
+      <div class="modal__picture-container">
+        <button class="modal__close modal__close_picture"></button>
+        <img class="modal__picture" src="" alt="" />
+        <p class="modal__image-description"></p>
+      </div>
+    </div>
+
     <template class="card__template">
       <li class="card">
+        <button type="button" class="card__delete-button"></button>
         <img src="" alt="" class="card__image" />
         <div class="card__info">
           <h2 class="card__title"></h2>
-          <button type="button" class="card__like-button">
-            <img
-              src="./images/like-button.svg"
-              alt="like button"
-              class="card__like-button-image"
-            />
-          </button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </li>
     </template>

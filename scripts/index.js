@@ -52,6 +52,14 @@ const newItemModalForm = newItemModal.querySelector(".modal__form");
 const newItemTitle = newItemModal.querySelector("#modal__new-item-title");
 const newItemURL = newItemModal.querySelector("#modal__new-item-url");
 
+// Picture Popup Modal
+const picturePopupModal = document.querySelector("#modal__picture-popup");
+const picturePopup = document.querySelector(".modal__picture");
+const pictureDescription = picturePopupModal.querySelector(
+  ".modal__image-description"
+);
+const closePicturePopup = picturePopupModal.querySelector(".modal__close");
+
 /* ------------
 Functions 
 ------------ */
@@ -84,12 +92,30 @@ function submitNewItemPopup(e) {
 }
 
 function getCardElement(data) {
-  let cardElement = cardTemplate.cloneNode(true);
-  let cardTitleEl = cardElement.querySelector(".card__title");
-  let cardImageEl = cardElement.querySelector(".card__image");
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
+
+  cardImageEl.addEventListener("click", () => {
+    openPopup(picturePopupModal);
+    picturePopup.src = cardImageEl.src;
+    pictureDescription.textContent = cardTitleEl.textContent;
+  });
+
   return cardElement;
 }
 
@@ -110,6 +136,10 @@ editProfileModalForm.addEventListener("submit", submitEditPopup);
 newItemModalOpen.addEventListener("click", () => openPopup(newItemModal));
 newItemModalClose.addEventListener("click", () => closePopup(newItemModal));
 newItemModalForm.addEventListener("submit", submitNewItemPopup);
+
+closePicturePopup.addEventListener("click", () =>
+  closePopup(picturePopupModal)
+);
 
 /* -----------
 Handler

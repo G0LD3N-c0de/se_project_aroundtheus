@@ -93,11 +93,45 @@
   opacity: 0.8;
 }
 
+/* Picture Popup Modal */
+
+.modal__picture-container {
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-height: 75vw;
+  max-width: 75vw;
+}
+
+.modal__picture {
+  max-height: 75vw;
+  max-width: 75vw;
+}
+
+.modal__image-description {
+  font-size: 12px;
+  font-family: "inter", sans-serif;
+  color: #fff;
+  line-height: 14px;
+  position: absolute;
+  margin: 0;
+  bottom: -25px;
+}
+
 @media screen and (max-width: 660px) {
   .modal__close {
     right: 0;
     height: 26px;
     width: 26px;
+  }
+
+  .modal__close_picture {
+    right: -35px;
+    top: -35px;
+    height: 30px;
+    width: 30px;
   }
 }
 
