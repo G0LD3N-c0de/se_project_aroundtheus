@@ -18,7 +18,6 @@
 .modal_opened {
   visibility: visible;
   opacity: 1;
-  display: flex;
   transition-delay: 0s;
 }
 

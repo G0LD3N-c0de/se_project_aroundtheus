@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -37,7 +37,8 @@ const cardList = document.querySelector(".gallery__cards");
 
 const editProfileModal = document.querySelector("#modal__edit-profile");
 const editProfileButton = document.querySelector(".profile__rectangle");
-const editProfileModalCloseButton = document.querySelector(".modal__close");
+const editProfileModalCloseButton =
+  editProfileModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const modalTitle = document.querySelector("#modal__form-title");
@@ -52,13 +53,14 @@ const newItemModalForm = newItemModal.querySelector(".modal__form");
 const newItemTitle = newItemModal.querySelector("#modal__new-item-title");
 const newItemURL = newItemModal.querySelector("#modal__new-item-url");
 
-// Picture Popup Modal
+// Picture Popup Modal Elements
 const picturePopupModal = document.querySelector("#modal__picture-popup");
 const picturePopup = document.querySelector(".modal__picture");
 const pictureDescription = picturePopupModal.querySelector(
   ".modal__image-description"
 );
-const closePicturePopup = picturePopupModal.querySelector(".modal__close");
+const picturePopupCloseButton =
+  picturePopupModal.querySelector(".modal__close");
 
 /* ------------
 Functions 
@@ -85,6 +87,7 @@ function submitNewItemPopup(e) {
   const link = newItemURL.value;
   renderCard({ name, link });
   closePopup(newItemModal);
+  newItemModalForm.reset();
 }
 
 function getCardElement(data) {
@@ -121,15 +124,21 @@ function renderCard(cardData) {
   cardList.prepend(cardElement);
 }
 
+function fillProfileForm() {
+  modalTitle.value = profileTitle.textContent;
+  modalDescription.value = profileDescription.textContent;
+}
+
+function openEditProfileModal() {
+  fillProfileForm();
+  openPopup(editProfileModal);
+}
+
 /* -------------
 Event Listeners
 ------------- */
 
-editProfileButton.addEventListener("click", () => {
-  modalTitle.value = profileTitle.textContent;
-  modalDescription.value = profileDescription.textContent;
-  openPopup(editProfileModal);
-});
+editProfileButton.addEventListener("click", openEditProfileModal);
 editProfileModalCloseButton.addEventListener("click", () =>
   closePopup(editProfileModal)
 );
@@ -139,7 +148,7 @@ newItemModalOpen.addEventListener("click", () => openPopup(newItemModal));
 newItemModalClose.addEventListener("click", () => closePopup(newItemModal));
 newItemModalForm.addEventListener("submit", submitNewItemPopup);
 
-closePicturePopup.addEventListener("click", () =>
+picturePopupCloseButton.addEventListener("click", () =>
   closePopup(picturePopupModal)
 );
 
