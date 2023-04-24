@@ -47,22 +47,35 @@
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form" name="modal__form">
-          <input
-            class="modal__form-input"
-            id="modal__form-title"
-            type="text"
-            name="title"
-            placeholder="Name"
-            required
-          />
-          <input
-            class="modal__form-input"
-            id="modal__form-description"
-            type="text"
-            name="subtitle"
-            placeholder="Description"
-            required
-          />
+          <div class="modal__form-input-wrapper">
+            <input
+              class="modal__form-input"
+              id="modal__form-title"
+              type="text"
+              name="title"
+              placeholder="Name"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="modal_error" id="modal__form-title-error"></span>
+          </div>
+          <div class="modal__form-input-wrapper">
+            <input
+              class="modal__form-input"
+              id="modal__form-description"
+              type="text"
+              name="subtitle"
+              placeholder="Description"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span
+              class="modal__error"
+              id="modal__form-description-error"
+            ></span>
+          </div>
           <button class="modal__save" type="submit">Save</button>
         </form>
       </div>
@@ -73,22 +86,30 @@
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">New place</h2>
         <form class="modal__form" name="modal__form">
-          <input
-            class="modal__form-input"
-            id="modal__new-item-title"
-            type="text"
-            name="title"
-            placeholder="Title"
-            required
-          />
-          <input
-            class="modal__form-input"
-            id="modal__new-item-url"
-            type="text"
-            name="image link"
-            placeholder="Image link"
-            required
-          />
+          <div class="modal__form-input-wrapper">
+            <input
+              class="modal__form-input"
+              id="modal__new-item-title"
+              type="text"
+              name="title"
+              placeholder="Title"
+              required
+              minlength="1"
+              maxlength="30"
+            />
+            <span class="modal__error" id="modal__new-item-title-error"></span>
+          </div>
+          <div class="modal__form-input-wrapper">
+            <input
+              class="modal__form-input"
+              id="modal__new-item-url"
+              type="url"
+              name="image link"
+              placeholder="Image link"
+              required
+            />
+            <span class="modal__error" id="modal__new-item-url-error"></span>
+          </div>
           <button class="modal__save" type="submit">Save</button>
         </form>
       </div>
@@ -114,5 +135,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
