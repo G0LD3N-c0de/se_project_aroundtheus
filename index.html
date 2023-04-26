@@ -58,7 +58,7 @@
               minlength="2"
               maxlength="40"
             />
-            <span class="modal_error" id="modal__form-title-error"></span>
+            <span class="modal__error" id="modal__form-title-error"></span>
           </div>
           <div class="modal__form-input-wrapper">
             <input
@@ -110,7 +110,13 @@
             />
             <span class="modal__error" id="modal__new-item-url-error"></span>
           </div>
-          <button class="modal__save" type="submit">Save</button>
+          <button
+            class="modal__save modal__save_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>

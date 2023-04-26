@@ -153,7 +153,37 @@ picturePopupCloseButton.addEventListener("click", () =>
 );
 
 /* -----------
-Handler
+Card Handler
 ----------- */
 
 initialCards.forEach((data) => renderCard(data));
+
+/* -----------
+Close Popup UX Design Handlers
+----------- */
+
+editProfileModal.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closePopup(editProfileModal);
+  }
+});
+
+newItemModal.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closePopup(newItemModal);
+  }
+});
+
+picturePopupModal.addEventListener("mousedown", (evt) => {
+  if (evt.target.classList.contains("modal")) {
+    closePopup(picturePopupModal);
+  }
+});
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closePopup(editProfileModal);
+    closePopup(newItemModal);
+    closePopup(picturePopupModal);
+  }
+});

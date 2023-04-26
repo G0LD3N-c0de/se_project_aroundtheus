@@ -98,7 +98,6 @@
   position: absolute;
   top: 33px;
   color: red;
-  max-width: 358px;
   font-family: "inter", sans-serif;
   font-size: 12px;
   line-height: 14px;
@@ -115,6 +114,12 @@
   font-size: 18px;
   line-height: 21px;
   transition: 0.5s linear;
+}
+
+.modal__save_disabled {
+  background-color: transparent;
+  border: 1px solid gray;
+  color: gray;
 }
 
 .modal__save:hover {
