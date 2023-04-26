@@ -68,10 +68,14 @@ Functions
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+  document.removeEventListener("keydown", closeModalByEscape);
 }
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  modal.addEventListener("mousedown", closeModalOnRemoteClick);
+  document.addEventListener("keydown", closeModalByEscape);
 }
 
 function submitEditPopup(e) {
@@ -88,6 +92,12 @@ function submitNewItemPopup(e) {
   renderCard({ name, link });
   closePopup(newItemModal);
   newItemModalForm.reset();
+
+  const newItemInputs = [
+    ...newItemModalForm.querySelectorAll(".modal__form-input"),
+  ];
+  const newItemButton = newItemModalForm.querySelector(".modal__save");
+  toggleButtonState(newItemInputs, newItemButton, options);
 }
 
 function getCardElement(data) {
@@ -159,31 +169,19 @@ Card Handler
 initialCards.forEach((data) => renderCard(data));
 
 /* -----------
-Close Popup UX Design Handlers
+Close Popup UX Design Functions
+Functions added to open popup and close popup functions
 ----------- */
 
-editProfileModal.addEventListener("mousedown", (evt) => {
+function closeModalOnRemoteClick(evt) {
   if (evt.target.classList.contains("modal")) {
-    closePopup(editProfileModal);
+    closePopup(evt.target);
   }
-});
+}
 
-newItemModal.addEventListener("mousedown", (evt) => {
-  if (evt.target.classList.contains("modal")) {
-    closePopup(newItemModal);
-  }
-});
-
-picturePopupModal.addEventListener("mousedown", (evt) => {
-  if (evt.target.classList.contains("modal")) {
-    closePopup(picturePopupModal);
-  }
-});
-
-document.addEventListener("keydown", (evt) => {
+function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
-    closePopup(editProfileModal);
-    closePopup(newItemModal);
-    closePopup(picturePopupModal);
+    const openedModal = document.querySelector(".modal_opened");
+    closePopup(openedModal);
   }
-});
+}
