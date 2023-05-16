@@ -15,7 +15,7 @@ https://g0ld3n-c0de.github.io/se_project_aroundtheus/ <--- Click me to see websi
 
 **Intro**
 
-This project depicts a sample profile page with a responsive layout. The website is designed to appear both aesthetically pleasing and logically designed on all screen sizes. Uses JavaScript to render and add cards.
+This project depicts a sample profile page with a responsive layout. Uses JavaScript to render and add cards. Uses JavaScript to validate forms and produce error messages if they do not meet input requirements.
 
 **Figma**
 
@@ -30,6 +30,8 @@ This project utilized Figma, HTML, and CSS. Important techniques include flexbox
 ![Desktop Sample](./images/readme-pic.png)
 ![Tablet Sample](./images/readme-pictwo.png)
 ![Mobile Sample](./images/readme-picthree.png)
+![Error Sample](./images/readme-error.png)
+![No Error Sample](./images/readme-noerror.png)
 
 **GitHub Page**
 
