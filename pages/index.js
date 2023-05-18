@@ -57,27 +57,19 @@ initialCards.forEach((data) => renderCard(data, templateSelector));
 
 const editProfileModal = document.querySelector("#modal__edit-profile");
 const editProfileButton = document.querySelector(".profile__rectangle");
-const editProfileModalCloseButton =
-  editProfileModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const modalTitle = document.querySelector("#modal__form-title");
 const modalDescription = document.querySelector("#modal__form-description");
-const editProfileModalForm = editProfileModal.querySelector(".modal__form");
+const editProfileModalForm = document.forms["profile-form"];
 
 // Add Pictures Modal Elements
 
 const newItemModalOpen = document.querySelector(".profile__add-button");
 const newItemModal = document.querySelector("#modal__new-item");
-const newItemModalClose = newItemModal.querySelector(".modal__close");
-const newItemModalForm = newItemModal.querySelector(".modal__form");
+const newItemModalForm = document.forms["card-form"];
 const newItemTitle = newItemModal.querySelector("#modal__new-item-title");
 const newItemURL = newItemModal.querySelector("#modal__new-item-url");
-
-// Picture Popup Modal Elements
-
-const picturePopupCloseButton =
-  picturePopupModal.querySelector(".modal__close");
 
 /* ------------
 Functions 
@@ -97,23 +89,18 @@ function submitNewItemPopup(e) {
   renderCard({ name, link }, templateSelector);
   utils.closePopup(newItemModal);
   newItemModalForm.reset();
-
-  const newItemInputs = [
-    ...newItemModalForm.querySelectorAll(".modal__form-input"),
-  ];
-  const newItemButton = newItemModalForm.querySelector(".modal__save");
-  newItemFormValidator._toggleButtonState(newItemInputs, newItemButton);
+  newItemFormValidator.disableSubmitButton();
 }
 
 function fillProfileForm() {
   modalTitle.value = profileTitle.textContent;
   modalDescription.value = profileDescription.textContent;
-  editFormValidator.enableSubmitButton();
 }
 
 function openEditProfileModal() {
   fillProfileForm();
   utils.openPopup(editProfileModal);
+  editFormValidator.enableSubmitButton();
 }
 
 /* -------------
@@ -121,20 +108,18 @@ Event Listeners
 ------------- */
 
 editProfileButton.addEventListener("click", openEditProfileModal);
-editProfileModalCloseButton.addEventListener("click", () =>
-  utils.closePopup(editProfileModal)
-);
+
 editProfileModalForm.addEventListener("submit", submitEditPopup);
 
 newItemModalOpen.addEventListener("click", () => utils.openPopup(newItemModal));
-newItemModalClose.addEventListener("click", () =>
-  utils.closePopup(newItemModal)
-);
+
 newItemModalForm.addEventListener("submit", submitNewItemPopup);
 
-picturePopupCloseButton.addEventListener("click", () =>
-  utils.closePopup(picturePopupModal)
-);
+const closeButtons = document.querySelectorAll(".modal__close");
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => utils.closePopup(popup));
+});
 
 // ----------------- FORM VALIDATION ------------------- //
 
