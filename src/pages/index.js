@@ -8,20 +8,12 @@ import {
   initialCards,
   editProfileButton,
   editProfileModalForm,
-  profileTitle,
-  profileDescription,
   modalTitle,
   modalDescription,
   newItemModalOpen,
-  newItemModal,
   newItemModalForm,
-  newItemTitle,
-  newItemURL,
   cardList,
   templateSelector,
-  picturePopupModal,
-  picturePopup,
-  pictureDescription,
 } from "../utils/constants.js";
 import "./index.css";
 

@@ -28,10 +28,6 @@ export const initialCards = [
 // Edit Profile Modal Elements
 
 export const editProfileButton = document.querySelector(".profile__rectangle");
-export const profileTitle = document.querySelector(".profile__title");
-export const profileDescription = document.querySelector(
-  ".profile__description"
-);
 export const modalTitle = document.querySelector("#modal__form-title");
 export const modalDescription = document.querySelector(
   "#modal__form-description"
@@ -41,12 +37,7 @@ export const editProfileModalForm = document.forms["profile-form"];
 // Add Pictures Modal Elements
 
 export const newItemModalOpen = document.querySelector(".profile__add-button");
-export const newItemModal = document.querySelector("#modal__new-item");
 export const newItemModalForm = document.forms["card-form"];
-export const newItemTitle = newItemModal.querySelector(
-  "#modal__new-item-title"
-);
-export const newItemURL = newItemModal.querySelector("#modal__new-item-url");
 
 /* -----------
 Card Elements
@@ -54,10 +45,3 @@ Card Elements
 
 export const cardList = ".gallery__cards";
 export const templateSelector = ".card__template";
-export const picturePopupModal = document.querySelector(
-  "#modal__picture-popup"
-);
-export const picturePopup = document.querySelector(".modal__picture");
-export const pictureDescription = picturePopupModal.querySelector(
-  ".modal__image-description"
-);
