@@ -66,7 +66,7 @@
   white-space: nowrap;
   overflow: hidden;
   transition: 0.5s ease-out;
-  max-width: 200px;
+  max-width: 400px;
 }
 
 .profile__add-button {
@@ -97,7 +97,7 @@
 
   .profile__description {
     font-size: 16px;
-    max-width: 180px;
+    max-width: 280px;
   }
 
   .profile__add-button {
@@ -113,7 +113,7 @@
   }
 
   .profile__description {
-    max-width: 160px;
+    max-width: 280px;
   }
 }
 
@@ -153,7 +153,7 @@
     text-align: center;
     margin-top: 14px;
     transition: none;
-    max-width: 100px;
+    max-width: 300px;
   }
 
   .profile__rectangle {
