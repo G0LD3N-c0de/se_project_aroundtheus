@@ -52,7 +52,7 @@ export const newItemURL = newItemModal.querySelector("#modal__new-item-url");
 Card Elements
 ----------- */
 
-export const cardList = document.querySelector(".gallery__cards");
+export const cardList = ".gallery__cards";
 export const templateSelector = ".card__template";
 export const picturePopupModal = document.querySelector(
   "#modal__picture-popup"

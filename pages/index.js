@@ -1,6 +1,5 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import * as utils from "../utils/utils.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -27,6 +26,21 @@ import {
 
 // ----- SECTIONS ----- //
 
+const cardSection = new Section(
+  {
+    renderer: (item) => {
+      const cardEl = new Card(item, templateSelector, (data) => {
+        previewPicturePopup.open(data);
+      });
+      cardSection.addItem(cardEl.getView());
+    },
+  },
+  cardList
+);
+initialCards.forEach((data) => {
+  cardSection.renderItems(data);
+});
+
 // ----- POPUPS ----- //
 
 const userInformation = new UserInfo({
@@ -47,7 +61,7 @@ editProfileButton.addEventListener("click", () => {
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
-  console.log(data);
+  cardSection.renderItems(data);
 });
 newItemPopup.setEventListeners();
 newItemModalOpen.addEventListener("click", () => {
@@ -56,17 +70,6 @@ newItemModalOpen.addEventListener("click", () => {
 
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();
-
-// ----- CARDS ----- //
-
-function renderCard(cardData, templateSelector) {
-  const cardElement = new Card(cardData, templateSelector, (data) => {
-    previewPicturePopup.open(data);
-  });
-  cardList.prepend(cardElement.getView());
-}
-
-initialCards.forEach((data) => renderCard(data, templateSelector));
 
 // ----- FORM VALIDATION ----- //
 
