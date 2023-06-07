@@ -14,25 +14,29 @@ import {
   newItemModalForm,
   cardList,
   templateSelector,
+  options,
 } from "../utils/constants.js";
 import "./index.css";
 
 // ----- SECTIONS ----- //
 
+function createCard(item) {
+  const cardElement = new Card(item, templateSelector, (data) => {
+    previewPicturePopup.open(data);
+  });
+  return cardElement.getView();
+}
+
 const cardSection = new Section(
   {
     renderer: (item) => {
-      const cardEl = new Card(item, templateSelector, (data) => {
-        previewPicturePopup.open(data);
-      });
-      cardSection.addItem(cardEl.getView());
+      const cardEl = createCard(item);
+      cardSection.addItem(cardEl);
     },
   },
   cardList
 );
-initialCards.forEach((data) => {
-  cardSection.renderItems(data);
-});
+cardSection.renderItems(initialCards);
 
 // ----- POPUPS ----- //
 
@@ -48,31 +52,25 @@ editProfilePopup.setEventListeners();
 
 editProfileButton.addEventListener("click", () => {
   editProfilePopup.open();
-  modalTitle.value = userInformation.getUserInfo().name;
-  modalDescription.value = userInformation.getUserInfo().description;
-  editFormValidator.enableSubmitButton();
+  const { description, name } = userInformation.getUserInfo();
+  modalTitle.value = name;
+  modalDescription.value = description;
+  editFormValidator.resetValidation();
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
-  cardSection.renderItems(data);
+  cardSection.renderItems([data]);
 });
 newItemPopup.setEventListeners();
 newItemModalOpen.addEventListener("click", () => {
   newItemPopup.open();
+  newItemFormValidator.resetValidation();
 });
 
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();
 
 // ----- FORM VALIDATION ----- //
-
-const options = {
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__save",
-  inactiveButtonClass: "modal__save_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 const editFormValidator = new FormValidator(options, editProfileModalForm);
 editFormValidator.enableValidation();

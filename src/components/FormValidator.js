@@ -46,6 +46,14 @@ class FormValidator {
     this._submitButton.disabled = false;
   }
 
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputEls.forEach((inputEl) => {
+      this._hideInputError(inputEl);
+    });
+  }
+
   _toggleButtonState() {
     const isFormValid = this._checkFormValidity(this._inputEls);
 

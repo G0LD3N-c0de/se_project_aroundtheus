@@ -45,3 +45,13 @@ Card Elements
 
 export const cardList = ".gallery__cards";
 export const templateSelector = ".card__template";
+
+// ----- Form Validator Options ----- //
+
+export const options = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
