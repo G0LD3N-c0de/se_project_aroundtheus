@@ -25,6 +25,14 @@ export const initialCards = [
   },
 ];
 
+// Profile Elements
+
+export const profileTitle = document.querySelector(".profile__title");
+export const profileDescription = document.querySelector(
+  ".profile__description"
+);
+export const profileImage = document.querySelector(".profile__avatar");
+
 // Edit Profile Modal Elements
 
 export const editProfileButton = document.querySelector(".profile__rectangle");
@@ -38,6 +46,12 @@ export const editProfileModalForm = document.forms["profile-form"];
 
 export const newItemModalOpen = document.querySelector(".profile__add-button");
 export const newItemModalForm = document.forms["card-form"];
+
+// Delete Card Elements
+
+export const deleteCardButton = document.querySelectorAll(
+  ".card__delete-button"
+);
 
 /* -----------
 Card Elements

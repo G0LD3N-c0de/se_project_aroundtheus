@@ -18,8 +18,8 @@
       </header>
       <main>
         <section class="profile page__section">
-          <img src="<%=require("./images/Sonder.jpg")%>" alt="photo of Nicoli
-          Kazemi - digital" class="profile__avatar" />
+          <img alt="photo of Nicoli Kazemi - digital" class="profile__avatar"
+          src="<%=require("./images/Sonder.jpg")%>" />
           <div class="profile__info">
             <div class="profile__flex-container">
               <h1 class="profile__title">Nicoli Kazemi</h1>
@@ -116,6 +116,18 @@
         <button class="modal__close modal__close_picture"></button>
         <img class="modal__picture" src="#" alt="" />
         <p class="modal__image-description"></p>
+      </div>
+    </div>
+
+    <div class="modal" id="modal__delete-picture">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading modal__heading_delete">Are you sure?</h2>
+        <form class="modal__form" name="card-delete-form">
+          <button class="modal__save modal__save_delete" type="submit">
+            Yes
+          </button>
+        </form>
       </div>
     </div>
 

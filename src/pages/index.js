@@ -4,9 +4,8 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/Api.js";
+import Api from "../components/API.js";
 import {
-  initialCards,
   editProfileButton,
   editProfileModalForm,
   modalTitle,
@@ -16,15 +15,56 @@ import {
   cardList,
   templateSelector,
   options,
+  profileTitle,
+  profileImage,
+  profileDescription,
 } from "../utils/constants.js";
 import "./index.css";
 
+// ----- APIs ----- //
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "02a3c077-82c6-4270-8df6-e8c1f2fec9e8",
+    "content-type": "application/json",
+  },
+});
+
+api
+  .getUserInformation()
+  .then((data) => {
+    profileTitle.textContent = data.name;
+    profileDescription.textContent = data.about;
+    profileImage.src = data.avatar;
+  })
+  .catch((err) => console.error(err));
+
+api
+  .getInitialCards()
+  .then((data) => {
+    cardSection.renderItems(data.reverse());
+  })
+  .catch((err) => console.error(err));
+
+api.getInitialCards().then((cards) => {
+  cards.forEach((card) => {
+    console.log(card.owner.name);
+  });
+});
 // ----- SECTIONS ----- //
 
 function createCard(item) {
-  const cardElement = new Card(item, templateSelector, (data) => {
-    previewPicturePopup.open(data);
-  });
+  const cardElement = new Card(
+    item,
+    templateSelector,
+    (data) => {
+      previewPicturePopup.open(data);
+    },
+    () => {
+      deleteCardPopup.open();
+    }
+  );
   return cardElement.getView();
 }
 
@@ -37,7 +77,6 @@ const cardSection = new Section(
   },
   cardList
 );
-cardSection.renderItems(initialCards);
 
 // ----- POPUPS ----- //
 
@@ -47,7 +86,7 @@ const userInformation = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
-  userInformation.setUserInfo(data);
+  userInformation.setUserInfo(data), api.editUserInformation(data);
 });
 editProfilePopup.setEventListeners();
 
@@ -60,7 +99,7 @@ editProfileButton.addEventListener("click", () => {
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
-  cardSection.renderItems([data]);
+  cardSection.renderItems([data]), api.addNewCard(data);
 });
 newItemPopup.setEventListeners();
 newItemModalOpen.addEventListener("click", () => {
@@ -70,6 +109,9 @@ newItemModalOpen.addEventListener("click", () => {
 
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();
+
+const deleteCardPopup = new PopupWithForm("#modal__delete-picture");
+deleteCardPopup.setEventListeners();
 
 // ----- FORM VALIDATION ----- //
 

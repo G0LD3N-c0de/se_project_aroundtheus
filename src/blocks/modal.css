@@ -60,6 +60,10 @@
   transition: 0.5s linear;
 }
 
+.modal__heading_delete {
+  margin-bottom: 0;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -116,6 +120,10 @@
   font-size: 18px;
   line-height: 21px;
   transition: 0.5s linear;
+}
+
+.modal__save_delete {
+  margin-top: 36px;
 }
 
 .modal__save_disabled {
