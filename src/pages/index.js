@@ -4,7 +4,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/API.js";
+import Api from "../components/Api.js";
 import {
   editProfileButton,
   editProfileModalForm,
@@ -47,15 +47,10 @@ api
   })
   .catch((err) => console.error(err));
 
-api.getInitialCards().then((cards) => {
-  cards.forEach((card) => {
-    console.log(card.owner.name);
-  });
-});
 // ----- SECTIONS ----- //
 
 function createCard(item) {
-  const cardElement = new Card(
+  const card = new Card(
     item,
     templateSelector,
     (data) => {
@@ -63,9 +58,15 @@ function createCard(item) {
     },
     () => {
       deleteCardPopup.open();
+    },
+    (data) => {
+      api.handleSubmitLike(data);
+    },
+    (data) => {
+      api.handleDeleteLike(data);
     }
   );
-  return cardElement.getView();
+  return card.getView();
 }
 
 const cardSection = new Section(
@@ -107,11 +108,13 @@ newItemModalOpen.addEventListener("click", () => {
   newItemFormValidator.resetValidation();
 });
 
+const deleteCardPopup = new PopupWithForm("#modal__delete-picture", (data) => {
+  console.log(data);
+});
+deleteCardPopup.setEventListeners();
+
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();
-
-const deleteCardPopup = new PopupWithForm("#modal__delete-picture");
-deleteCardPopup.setEventListeners();
 
 // ----- FORM VALIDATION ----- //
 

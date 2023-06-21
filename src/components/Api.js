@@ -48,6 +48,16 @@ export default class Api {
     });
   }
 
+  handleDeleteCard(cardId) {
+    return fetch(this._baseUrl + "/cards/" + cardId, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authorization,
+        "content-type": this._contentType,
+      },
+    });
+  }
+
   getInitialCards() {
     return fetch(this._baseUrl + "/cards", {
       headers: {
@@ -61,5 +71,32 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
       }
     });
+  }
+
+  handleSubmitLike(cardID) {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+      method: "PUT",
+      headers: {
+        authorization: this._authorization,
+        "content-type": this._contentType,
+      },
+    });
+  }
+
+  handleDeleteLike(cardID) {
+    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authorization,
+        "content-type": this._contentType,
+      },
+    });
+  }
+
+  // submit the like on positive click
+  // remove the like on negative click
+
+  promiseAll(promises) {
+    return Promise.all(promises);
   }
 }
