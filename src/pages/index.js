@@ -18,10 +18,13 @@ import {
   profileTitle,
   profileImage,
   profileDescription,
+  updateImage,
 } from "../utils/constants.js";
 import "./index.css";
 
+//////////////////////
 // ----- APIs ----- //
+//////////////////////
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -47,7 +50,9 @@ api
   })
   .catch((err) => console.error(err));
 
+//////////////////////////
 // ----- SECTIONS ----- //
+//////////////////////////
 
 function createCard(item) {
   const card = new Card(
@@ -60,10 +65,14 @@ function createCard(item) {
       deleteCardPopup.open();
     },
     (data) => {
-      api.handleSubmitLike(data);
+      api.handleSubmitLike(data).then((data) => {
+        card.renderLikes(data.likes.length);
+      });
     },
     (data) => {
-      api.handleDeleteLike(data);
+      api.handleDeleteLike(data).then((data) => {
+        card.renderLikes(data.likes.length);
+      });
     }
   );
   return card.getView();
@@ -79,7 +88,9 @@ const cardSection = new Section(
   cardList
 );
 
+////////////////////////
 // ----- POPUPS ----- //
+////////////////////////
 
 const userInformation = new UserInfo({
   nameSelector: ".profile__title",
@@ -87,7 +98,9 @@ const userInformation = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
-  userInformation.setUserInfo(data), api.editUserInformation(data);
+  api.editUserInformation(data).then((data) => {
+    userInformation.setUserInfo(data);
+  });
 });
 editProfilePopup.setEventListeners();
 
@@ -100,7 +113,9 @@ editProfileButton.addEventListener("click", () => {
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
-  cardSection.renderItems([data]), api.addNewCard(data);
+  api.addNewCard(data).then((data) => {
+    cardSection.renderItems([data]);
+  });
 });
 newItemPopup.setEventListeners();
 newItemModalOpen.addEventListener("click", () => {
@@ -113,10 +128,18 @@ const deleteCardPopup = new PopupWithForm("#modal__delete-picture", (data) => {
 });
 deleteCardPopup.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm("#modal__update-avatar", () => {});
+editAvatarPopup.setEventListeners();
+updateImage.addEventListener("click", () => {
+  editAvatarPopup.open();
+});
+
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();
 
+/////////////////////////////////
 // ----- FORM VALIDATION ----- //
+/////////////////////////////////
 
 const editFormValidator = new FormValidator(options, editProfileModalForm);
 editFormValidator.enableValidation();

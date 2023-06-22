@@ -18,17 +18,26 @@
       </header>
       <main>
         <section class="profile page__section">
-          <img
-            alt="photo of Nicoli Kazemi - digital"
-            class="profile__avatar"
-            src=""
-          />
+          <div class="profile__avatar-container">
+            <img
+              alt="photo of Nicoli Kazemi - digital"
+              class="profile__avatar"
+              src=""
+            />
+            <div class="profile__avatar-overlay">
+              <img
+                class="profile__avatar-icon"
+                src="<%=require('./images/edit-icon.png')%>"
+                alt=""
+              />
+            </div>
+          </div>
           <div class="profile__info">
             <div class="profile__flex-container">
-              <h1 class="profile__title">Nicoli Kazemi</h1>
+              <h1 class="profile__title"></h1>
               <button type="button" class="profile__rectangle"></button>
             </div>
-            <p class="profile__description">Developer, Teacher, Traveler</p>
+            <p class="profile__description"></p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
@@ -109,7 +118,7 @@
             />
             <span class="modal__error" id="modal__new-item-url-error"></span>
           </div>
-          <button class="modal__save" type="submit">Save</button>
+          <button class="modal__save" type="submit">Create</button>
         </form>
       </div>
     </div>
@@ -134,13 +143,32 @@
       </div>
     </div>
 
+    <div class="modal" id="modal__update-avatar">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" name="update-avatar-form">
+          <input
+            class="modal__form-input"
+            type="url"
+            required
+            placeholder="Avatar link"
+          />
+          <button class="modal__save" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
     <template class="card__template">
       <li class="card">
         <button type="button" class="card__delete-button"></button>
         <img src="#" alt="" class="card__image" />
         <div class="card__info">
           <h2 class="card__title"></h2>
-          <button type="button" class="card__like-button"></button>
+          <div class="card__like-container">
+            <button type="button" class="card__like-button"></button>
+            <div class="card__like-number"></div>
+          </div>
         </div>
       </li>
     </template>

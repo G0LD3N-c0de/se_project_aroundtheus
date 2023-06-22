@@ -11,13 +11,7 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(this._handleServerResponse);
   }
 
   editUserInformation(data) {
@@ -31,7 +25,7 @@ export default class Api {
         name: data.title,
         about: data.subtitle,
       }),
-    });
+    }).then(this._handleServerResponse);
   }
 
   addNewCard(data) {
@@ -45,7 +39,7 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    });
+    }).then(this._handleServerResponse);
   }
 
   handleDeleteCard(cardId) {
@@ -55,7 +49,7 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-    });
+    }).then(this._handleServerResponse);
   }
 
   getInitialCards() {
@@ -64,13 +58,7 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(this._handleServerResponse);
   }
 
   handleSubmitLike(cardID) {
@@ -80,7 +68,7 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-    });
+    }).then(this._handleServerResponse);
   }
 
   handleDeleteLike(cardID) {
@@ -90,11 +78,25 @@ export default class Api {
         authorization: this._authorization,
         "content-type": this._contentType,
       },
-    });
+    }).then(this._handleServerResponse);
   }
 
-  // submit the like on positive click
-  // remove the like on negative click
+  updateProfilePicture(data) {
+    return fetch(this._baseUrl + "/users/me/avatar", {
+      method: "PATCH",
+      headers: {
+        authorization: this._authorization,
+        "content-type": this._contentType,
+      },
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
+    }).then(this._handleServerResponse);
+  }
+
+  _handleServerResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  }
 
   promiseAll(promises) {
     return Promise.all(promises);
