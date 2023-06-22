@@ -17,7 +17,6 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  z-index: 0;
 }
 
 .profile__avatar-overlay {
@@ -32,12 +31,13 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
+  border-radius: 50%;
+  transition: 0.3s;
 }
 
 .profile__avatar-container:hover .profile__avatar-overlay {
   visibility: visible;
   opacity: 1;
-  transition: 0.3s;
 }
 
 .profile__info {

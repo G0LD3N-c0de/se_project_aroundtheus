@@ -32,7 +32,10 @@ export const profileDescription = document.querySelector(
   ".profile__description"
 );
 export const profileImage = document.querySelector(".profile__avatar");
-export const updateImage = document.querySelector(".profile__avatar-container");
+export const updateAvatarContainer = document.querySelector(
+  ".profile__avatar-container"
+);
+export const updateAvatarForm = document.forms["update-avatar-form"];
 
 // Edit Profile Modal Elements
 

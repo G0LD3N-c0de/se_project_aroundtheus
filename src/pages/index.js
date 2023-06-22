@@ -18,7 +18,8 @@ import {
   profileTitle,
   profileImage,
   profileDescription,
-  updateImage,
+  updateAvatarContainer,
+  updateAvatarForm,
 } from "../utils/constants.js";
 import "./index.css";
 
@@ -98,8 +99,15 @@ const userInformation = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
+  editProfilePopup.renderLoadingMessage("Saving...");
   api.editUserInformation(data).then((data) => {
-    userInformation.setUserInfo(data);
+    return new Promise((resolve) => {
+      userInformation.setUserInfo(data);
+      resolve();
+    }).then(() => {
+      editProfilePopup.close();
+      editProfilePopup.resetSaveButton("Save");
+    });
   });
 });
 editProfilePopup.setEventListeners();
@@ -113,8 +121,15 @@ editProfileButton.addEventListener("click", () => {
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
+  newItemPopup.renderLoadingMessage("Creating...");
   api.addNewCard(data).then((data) => {
-    cardSection.renderItems([data]);
+    return new Promise((resolve) => {
+      cardSection.renderItems([data]);
+      resolve();
+    }).then(() => {
+      newItemPopup.close();
+      newItemPopup.resetSaveButton("Create");
+    });
   });
 });
 newItemPopup.setEventListeners();
@@ -128,9 +143,22 @@ const deleteCardPopup = new PopupWithForm("#modal__delete-picture", (data) => {
 });
 deleteCardPopup.setEventListeners();
 
-const editAvatarPopup = new PopupWithForm("#modal__update-avatar", () => {});
+const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
+  editAvatarPopup.renderLoadingMessage("Saving...");
+  api.updateProfilePicture(data).then((data) => {
+    api
+      .getUserInformation(data)
+      .then((data) => {
+        profileImage.src = data.avatar;
+      })
+      .then(() => {
+        editAvatarPopup.close();
+        editAvatarPopup.resetSaveButton("Save");
+      });
+  });
+});
 editAvatarPopup.setEventListeners();
-updateImage.addEventListener("click", () => {
+updateAvatarContainer.addEventListener("click", () => {
   editAvatarPopup.open();
 });
 
@@ -145,3 +173,5 @@ const editFormValidator = new FormValidator(options, editProfileModalForm);
 editFormValidator.enableValidation();
 const newItemFormValidator = new FormValidator(options, newItemModalForm);
 newItemFormValidator.enableValidation();
+const updateAvatarFormValidator = new FormValidator(options, updateAvatarForm);
+updateAvatarFormValidator.enableValidation();
