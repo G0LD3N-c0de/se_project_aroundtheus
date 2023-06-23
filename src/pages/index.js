@@ -22,6 +22,7 @@ import {
   updateAvatarForm,
 } from "../utils/constants.js";
 import "./index.css";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //////////////////////
 // ----- APIs ----- //
@@ -62,8 +63,22 @@ function createCard(item) {
     (data) => {
       previewPicturePopup.open(data);
     },
-    () => {
+    (data) => {
       deleteCardPopup.open();
+      // set the submit action
+      deleteCardPopup.setSubmitAction(() => {
+        deleteCardPopup.renderLoadingMessage("Deleting...");
+        api
+          .handleDeleteCard(data._cardID)
+          .then(() => {
+            card.handleDeleteCard();
+          })
+          .then(() => {
+            deleteCardPopup.close();
+            deleteCardPopup.resetSaveButton("Yes");
+          });
+        // ...then
+      });
     },
     (data) => {
       api.handleSubmitLike(data).then((data) => {
@@ -104,10 +119,12 @@ const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
     return new Promise((resolve) => {
       userInformation.setUserInfo(data);
       resolve();
-    }).then(() => {
-      editProfilePopup.close();
-      editProfilePopup.resetSaveButton("Save");
-    });
+    })
+      .then(() => {
+        editProfilePopup.close();
+        editProfilePopup.resetSaveButton("Save");
+      })
+      .catch((err) => console.error(err));
   });
 });
 editProfilePopup.setEventListeners();
@@ -126,10 +143,12 @@ const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
     return new Promise((resolve) => {
       cardSection.renderItems([data]);
       resolve();
-    }).then(() => {
-      newItemPopup.close();
-      newItemPopup.resetSaveButton("Create");
-    });
+    })
+      .then(() => {
+        newItemPopup.close();
+        newItemPopup.resetSaveButton("Create");
+      })
+      .catch((err) => console.error(err));
   });
 });
 newItemPopup.setEventListeners();
@@ -137,11 +156,6 @@ newItemModalOpen.addEventListener("click", () => {
   newItemPopup.open();
   newItemFormValidator.resetValidation();
 });
-
-const deleteCardPopup = new PopupWithForm("#modal__delete-picture", (data) => {
-  console.log(data);
-});
-deleteCardPopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
   editAvatarPopup.renderLoadingMessage("Saving...");
@@ -154,13 +168,17 @@ const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
       .then(() => {
         editAvatarPopup.close();
         editAvatarPopup.resetSaveButton("Save");
-      });
+      })
+      .catch((err) => console.error(err));
   });
 });
 editAvatarPopup.setEventListeners();
 updateAvatarContainer.addEventListener("click", () => {
   editAvatarPopup.open();
 });
+
+const deleteCardPopup = new PopupWithConfirmation("#modal__delete-picture");
+deleteCardPopup.setEventListeners();
 
 const previewPicturePopup = new PopupWithImage("#modal__picture-popup");
 previewPicturePopup.setEventListeners();

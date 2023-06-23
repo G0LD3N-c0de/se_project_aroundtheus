@@ -3,7 +3,7 @@ export default class Card {
     data,
     templateSelector,
     handleImageClick,
-    handleDeleteCardPopup,
+    handleDeleteCard,
     handleSubmitLike,
     handleDeleteLike
   ) {
@@ -14,9 +14,9 @@ export default class Card {
     this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteCardPopup = handleDeleteCardPopup;
     this._handleSubmitLike = handleSubmitLike;
     this._handleDeletelike = handleDeleteLike;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _setEventListeners() {
@@ -26,7 +26,7 @@ export default class Card {
     });
     // remove card
     this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteCardPopup();
+      this._handleDeleteCard(this);
     });
     // open image popup
     this._cardImage.addEventListener("click", () =>
@@ -44,7 +44,7 @@ export default class Card {
     }
   }
 
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this._card.remove();
     this._card = null;
   }

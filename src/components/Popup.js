@@ -22,6 +22,14 @@ export default class Popup {
     }
   };
 
+  renderLoadingMessage(data) {
+    this._saveButton.textContent = data;
+  }
+
+  resetSaveButton(data) {
+    this._saveButton.textContent = data;
+  }
+
   _handleRemoteClose = (evt) => {
     if (evt.target.classList.contains("modal")) {
       this.close();
