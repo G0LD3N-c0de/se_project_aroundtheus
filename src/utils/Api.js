@@ -97,8 +97,4 @@ export default class Api {
   _handleServerResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   }
-
-  promiseAll(promises) {
-    return Promise.all(promises);
-  }
 }

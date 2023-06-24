@@ -27,11 +27,6 @@ export const initialCards = [
 
 // Profile Elements
 
-export const profileTitle = document.querySelector(".profile__title");
-export const profileDescription = document.querySelector(
-  ".profile__description"
-);
-export const profileImage = document.querySelector(".profile__avatar");
 export const updateAvatarContainer = document.querySelector(
   ".profile__avatar-container"
 );
@@ -63,7 +58,6 @@ Card Elements
 
 export const cardList = ".gallery__cards";
 export const templateSelector = ".card__template";
-export let userId;
 
 // ----- Form Validator Options ----- //
 

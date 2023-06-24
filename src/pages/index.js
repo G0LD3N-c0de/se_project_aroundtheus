@@ -15,9 +15,6 @@ import {
   cardList,
   templateSelector,
   options,
-  profileTitle,
-  profileImage,
-  profileDescription,
   updateAvatarContainer,
   updateAvatarForm,
 } from "../utils/constants.js";
@@ -37,20 +34,11 @@ const api = new Api({
 });
 
 let userId;
-api
-  .getUserInformation()
-  .then((data) => {
-    profileTitle.textContent = data.name;
-    profileDescription.textContent = data.about;
-    profileImage.src = data.avatar;
-    userId = data._id;
-  })
-  .catch((err) => console.error(err));
-
-api
-  .getInitialCards()
-  .then((data) => {
-    cardSection.renderItems(data.reverse());
+Promise.all([api.getUserInformation(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInformation.setUserInfo(user);
+    userId = user._id;
+    cardSection.renderItems(cards.reverse());
   })
   .catch((err) => console.error(err));
 
@@ -73,11 +61,12 @@ function createCard(item) {
           .handleDeleteCard(data._cardId)
           .then(() => {
             card.deleteCard();
-          })
-          .then(() => {
             deleteCardPopup.close();
+          })
+          .finally(() => {
             deleteCardPopup.setButtonText("Yes");
-          });
+          })
+          .catch((err) => console.error(err));
       });
     },
     (data) => {
@@ -98,17 +87,6 @@ function createCard(item) {
   return card.getView();
 }
 
-// (data) => {
-//   api.handleSubmitLike(data).then((data) => {
-//     card.renderLikes(data.likes.length);
-//   });
-// },
-// (data) => {
-//   api.handleDeleteLike(data).then((data) => {
-//     card.renderLikes(data.likes.length);
-//   });
-// },
-
 const cardSection = new Section(
   {
     renderer: (item) => {
@@ -126,21 +104,21 @@ const cardSection = new Section(
 const userInformation = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 });
 
 const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
   editProfilePopup.setButtonText("Saving...");
-  api.editUserInformation(data).then((data) => {
-    return new Promise((resolve) => {
+  api
+    .editUserInformation(data)
+    .then((data) => {
       userInformation.setUserInfo(data);
-      resolve();
+      editProfilePopup.close();
     })
-      .then(() => {
-        editProfilePopup.close();
-        editProfilePopup.setButtonText("Save");
-      })
-      .catch((err) => console.error(err));
-  });
+    .finally(() => {
+      editProfilePopup.setButtonText("Save");
+    })
+    .catch((err) => console.error(err));
 });
 editProfilePopup.setEventListeners();
 
@@ -154,17 +132,16 @@ editProfileButton.addEventListener("click", () => {
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
   newItemPopup.setButtonText("Creating...");
-  api.addNewCard(data).then((data) => {
-    return new Promise((resolve) => {
+  api
+    .addNewCard(data)
+    .then((data) => {
       cardSection.renderItems([data]);
-      resolve();
+      newItemPopup.close();
     })
-      .then(() => {
-        newItemPopup.close();
-        newItemPopup.setButtonText("Create");
-      })
-      .catch((err) => console.error(err));
-  });
+    .finally(() => {
+      newItemPopup.setButtonText("Create");
+    })
+    .catch((err) => console.error(err));
 });
 newItemPopup.setEventListeners();
 newItemModalOpen.addEventListener("click", () => {
@@ -178,10 +155,10 @@ const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
     api
       .getUserInformation(data)
       .then((data) => {
-        profileImage.src = data.avatar;
-      })
-      .then(() => {
+        userInformation.setAvatar(data);
         editAvatarPopup.close();
+      })
+      .finally(() => {
         editAvatarPopup.setButtonText("Save");
       })
       .catch((err) => console.error(err));
