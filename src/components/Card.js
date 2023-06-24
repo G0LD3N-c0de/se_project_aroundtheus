@@ -4,9 +4,8 @@ export default class Card {
     templateSelector,
     handleImageClick,
     handleDeleteCard,
-    handleSubmitLike,
-    handleDeleteLike,
-    getUserId
+    handleLike,
+    userId
   ) {
     this._name = data.name;
     this._link = data.link;
@@ -15,16 +14,17 @@ export default class Card {
     this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
-    this._handleSubmitLike = handleSubmitLike;
-    this._handleDeletelike = handleDeleteLike;
+    // this._handleSubmitLike = handleSubmitLike;
+    // this._handleDeletelike = handleDeleteLike;
+    this._handleLike = handleLike;
     this._handleDeleteCard = handleDeleteCard;
-    this._getUserId = getUserId;
+    this._userId = userId;
   }
 
   _setEventListeners() {
     // handle like button
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeButton();
+      this._handleLike(this._cardId);
     });
     // remove card
     this._deleteButton.addEventListener("click", () => {
@@ -34,16 +34,6 @@ export default class Card {
     this._cardImage.addEventListener("click", () =>
       this._handleImageClick({ name: this._name, link: this._link })
     );
-  }
-
-  _handleLikeButton() {
-    if (this._likeButton.classList.contains("card__like-button_active")) {
-      this._likeButton.classList.remove("card__like-button_active");
-      this._handleDeletelike(this._cardId);
-    } else {
-      this._likeButton.classList.add("card__like-button_active");
-      this._handleSubmitLike(this._cardId);
-    }
   }
 
   deleteCard() {
@@ -57,12 +47,18 @@ export default class Card {
     this._renderLikes();
   }
 
-  isLiked() {}
+  isLiked() {
+    return this._likes.some((like) => like._id === this._userId);
+  }
 
-  _renderLikes(data) {
+  _renderLikes() {
     this._likeNumber.textContent = this._likes.length;
 
-    this._likeNumber.textContent = data;
+    if (this.isLiked()) {
+      this._likeButton.classList.add("card__like-button_active");
+    } else {
+      this._likeButton.classList.remove("card__like-button_active");
+    }
   }
 
   getView() {
@@ -80,13 +76,7 @@ export default class Card {
       this._deleteButton.remove();
     }
 
-    this._likes.forEach((like) => {
-      if (like._id === "266cf6456a61fda35af1736f") {
-        this._likeButton.classList.add("card__like-button_active");
-      }
-    });
-
-    this._likeNumber.textContent = this._likes.length;
+    this._renderLikes();
 
     this._cardTitle.textContent = this._name;
     this._cardImage.alt = this._name;

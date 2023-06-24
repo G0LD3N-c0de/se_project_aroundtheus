@@ -13,6 +13,10 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 
+  setButtonText(data) {
+    this._saveButton.textContent = data;
+  }
+
   _getInputValues() {
     this._inputValues = {};
     this._inputElements.forEach((element) => {

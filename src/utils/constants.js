@@ -63,6 +63,7 @@ Card Elements
 
 export const cardList = ".gallery__cards";
 export const templateSelector = ".card__template";
+export let userId;
 
 // ----- Form Validator Options ----- //
 

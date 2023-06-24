@@ -36,12 +36,14 @@ const api = new Api({
   },
 });
 
+let userId;
 api
   .getUserInformation()
   .then((data) => {
     profileTitle.textContent = data.name;
     profileDescription.textContent = data.about;
     profileImage.src = data.avatar;
+    userId = data._id;
   })
   .catch((err) => console.error(err));
 
@@ -65,9 +67,8 @@ function createCard(item) {
     },
     (data) => {
       deleteCardPopup.open();
-      // set the submit action
       deleteCardPopup.setSubmitAction(() => {
-        deleteCardPopup.renderLoadingMessage("Deleting...");
+        deleteCardPopup.setButtonText("Deleting...");
         api
           .handleDeleteCard(data._cardId)
           .then(() => {
@@ -75,29 +76,38 @@ function createCard(item) {
           })
           .then(() => {
             deleteCardPopup.close();
-            deleteCardPopup.resetSaveButton("Yes");
+            deleteCardPopup.setButtonText("Yes");
           });
-        // ...then
       });
     },
     (data) => {
-      api.handleSubmitLike(data).then((data) => {
-        card.renderLikes(data.likes.length);
-      });
+      if (card.isLiked()) {
+        api
+          .handleDeleteLike(data)
+          .then((response) => card.updateLikes(response.likes))
+          .catch((err) => console.error(err));
+      } else {
+        api
+          .handleSubmitLike(data)
+          .then((response) => card.updateLikes(response.likes))
+          .catch((err) => console.error(err));
+      }
     },
-    (data) => {
-      api.handleDeleteLike(data).then((data) => {
-        card.renderLikes(data.likes.length);
-      });
-    },
-    () => {
-      api.getUserInformation().then((data) => {
-        console.log(data._id);
-      });
-    }
+    userId
   );
   return card.getView();
 }
+
+// (data) => {
+//   api.handleSubmitLike(data).then((data) => {
+//     card.renderLikes(data.likes.length);
+//   });
+// },
+// (data) => {
+//   api.handleDeleteLike(data).then((data) => {
+//     card.renderLikes(data.likes.length);
+//   });
+// },
 
 const cardSection = new Section(
   {
@@ -119,7 +129,7 @@ const userInformation = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
-  editProfilePopup.renderLoadingMessage("Saving...");
+  editProfilePopup.setButtonText("Saving...");
   api.editUserInformation(data).then((data) => {
     return new Promise((resolve) => {
       userInformation.setUserInfo(data);
@@ -127,7 +137,7 @@ const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
     })
       .then(() => {
         editProfilePopup.close();
-        editProfilePopup.resetSaveButton("Save");
+        editProfilePopup.setButtonText("Save");
       })
       .catch((err) => console.error(err));
   });
@@ -143,7 +153,7 @@ editProfileButton.addEventListener("click", () => {
 });
 
 const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
-  newItemPopup.renderLoadingMessage("Creating...");
+  newItemPopup.setButtonText("Creating...");
   api.addNewCard(data).then((data) => {
     return new Promise((resolve) => {
       cardSection.renderItems([data]);
@@ -151,7 +161,7 @@ const newItemPopup = new PopupWithForm("#modal__new-item", (data) => {
     })
       .then(() => {
         newItemPopup.close();
-        newItemPopup.resetSaveButton("Create");
+        newItemPopup.setButtonText("Create");
       })
       .catch((err) => console.error(err));
   });
@@ -163,7 +173,7 @@ newItemModalOpen.addEventListener("click", () => {
 });
 
 const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
-  editAvatarPopup.renderLoadingMessage("Saving...");
+  editAvatarPopup.setButtonText("Saving...");
   api.updateProfilePicture(data).then((data) => {
     api
       .getUserInformation(data)
@@ -172,7 +182,7 @@ const editAvatarPopup = new PopupWithForm("#modal__update-avatar", (data) => {
       })
       .then(() => {
         editAvatarPopup.close();
-        editAvatarPopup.resetSaveButton("Save");
+        editAvatarPopup.setButtonText("Save");
       })
       .catch((err) => console.error(err));
   });
