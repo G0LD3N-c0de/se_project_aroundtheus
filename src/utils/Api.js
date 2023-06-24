@@ -6,7 +6,7 @@ export default class Api {
   }
 
   getUserInformation() {
-    return fetch(this._baseUrl + "/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         authorization: this._authorization,
         "content-type": this._contentType,
@@ -15,7 +15,7 @@ export default class Api {
   }
 
   editUserInformation(data) {
-    return fetch(this._baseUrl + "/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: this._authorization,
@@ -29,7 +29,7 @@ export default class Api {
   }
 
   addNewCard(data) {
-    return fetch(this._baseUrl + "/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
         authorization: this._authorization,
@@ -43,7 +43,7 @@ export default class Api {
   }
 
   handleDeleteCard(cardId) {
-    return fetch(this._baseUrl + "/cards/" + cardId, {
+    return fetch(`${this._baseUrl}/cards/` + cardId, {
       method: "DELETE",
       headers: {
         authorization: this._authorization,
@@ -53,7 +53,7 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(this._baseUrl + "/cards", {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authorization,
         "content-type": this._contentType,
@@ -62,7 +62,7 @@ export default class Api {
   }
 
   handleSubmitLike(cardID) {
-    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+    return fetch(`${this._baseUrl}/cards/likes/` + cardID, {
       method: "PUT",
       headers: {
         authorization: this._authorization,
@@ -72,7 +72,7 @@ export default class Api {
   }
 
   handleDeleteLike(cardID) {
-    return fetch(this._baseUrl + "/cards/likes/" + cardID, {
+    return fetch(`${this._baseUrl}/cards/likes/` + cardID, {
       method: "DELETE",
       headers: {
         authorization: this._authorization,
@@ -82,7 +82,7 @@ export default class Api {
   }
 
   updateProfilePicture(data) {
-    return fetch(this._baseUrl + "/users/me/avatar", {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this._authorization,

@@ -4,7 +4,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/Api.js";
+import Api from "../utils/Api.js";
 import {
   editProfileButton,
   editProfileModalForm,
@@ -69,9 +69,9 @@ function createCard(item) {
       deleteCardPopup.setSubmitAction(() => {
         deleteCardPopup.renderLoadingMessage("Deleting...");
         api
-          .handleDeleteCard(data._cardID)
+          .handleDeleteCard(data._cardId)
           .then(() => {
-            card.handleDeleteCard();
+            card.deleteCard();
           })
           .then(() => {
             deleteCardPopup.close();
@@ -88,6 +88,11 @@ function createCard(item) {
     (data) => {
       api.handleDeleteLike(data).then((data) => {
         card.renderLikes(data.likes.length);
+      });
+    },
+    () => {
+      api.getUserInformation().then((data) => {
+        console.log(data._id);
       });
     }
   );

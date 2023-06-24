@@ -5,18 +5,20 @@ export default class Card {
     handleImageClick,
     handleDeleteCard,
     handleSubmitLike,
-    handleDeleteLike
+    handleDeleteLike,
+    getUserId
   ) {
     this._name = data.name;
     this._link = data.link;
-    this._UserID = data.owner._id;
-    this._cardID = data._id;
+    this._ownerId = data.owner._id;
+    this._cardId = data._id;
     this._likes = data.likes;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
     this._handleSubmitLike = handleSubmitLike;
     this._handleDeletelike = handleDeleteLike;
     this._handleDeleteCard = handleDeleteCard;
+    this._getUserId = getUserId;
   }
 
   _setEventListeners() {
@@ -37,19 +39,29 @@ export default class Card {
   _handleLikeButton() {
     if (this._likeButton.classList.contains("card__like-button_active")) {
       this._likeButton.classList.remove("card__like-button_active");
-      this._handleDeletelike(this._cardID);
+      this._handleDeletelike(this._cardId);
     } else {
       this._likeButton.classList.add("card__like-button_active");
-      this._handleSubmitLike(this._cardID);
+      this._handleSubmitLike(this._cardId);
     }
   }
 
-  handleDeleteCard() {
+  deleteCard() {
     this._card.remove();
     this._card = null;
   }
 
-  renderLikes(data) {
+  updateLikes(likes) {
+    // set instance variable
+    this._likes = likes;
+    this._renderLikes();
+  }
+
+  isLiked() {}
+
+  _renderLikes(data) {
+    this._likeNumber.textContent = this._likes.length;
+
     this._likeNumber.textContent = data;
   }
 
@@ -64,7 +76,7 @@ export default class Card {
     this._deleteButton = this._card.querySelector(".card__delete-button");
     this._likeNumber = this._card.querySelector(".card__like-number");
     //get card view
-    if (this._UserID !== "266cf6456a61fda35af1736f") {
+    if (this._ownerId !== this._userId) {
       this._deleteButton.remove();
     }
 
