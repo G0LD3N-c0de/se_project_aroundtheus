@@ -37,6 +37,7 @@ let userId;
 Promise.all([api.getUserInformation(), api.getInitialCards()])
   .then(([user, cards]) => {
     userInformation.setUserInfo(user);
+    userInformation.setAvatar(user);
     userId = user._id;
     cardSection.renderItems(cards.reverse());
   })
@@ -113,6 +114,7 @@ const editProfilePopup = new PopupWithForm("#modal__edit-profile", (data) => {
     .editUserInformation(data)
     .then((data) => {
       userInformation.setUserInfo(data);
+      userInformation.setAvatar(data);
       editProfilePopup.close();
     })
     .finally(() => {
